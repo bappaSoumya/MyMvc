@@ -73,6 +73,53 @@ class QueryBuilder {
         $results = $this->get();
         return $results[0] ?? null;
     }
+    public function toSql() {
+        $sql = "SELECT $this->columns FROM $this->table";
+
+        if (!empty($this->joins)) {
+            $sql .= ' ' . implode(' ', $this->joins);
+        }
+
+        if (!empty($this->where)) {
+            $sql .= ' WHERE ' . implode(' AND ', $this->where);
+        }
+
+        if (!empty($this->orderBy)) {
+            $sql .= ' ' . $this->orderBy;
+        }
+
+        if (!empty($this->limit)) {
+            $sql .= ' ' . $this->limit;
+        }
+
+        return $sql;
+    }
+    public function update($data) {
+        $set = [];
+        foreach ($data as $column => $value) {
+            $set[] = "$column = ?";
+            $this->bindings[] = $value;
+        }
+        $setString = implode(', ', $set);
+        $sql = "UPDATE $this->table SET $setString";
+
+        if (!empty($this->where)) {
+            $sql .= ' WHERE ' . implode(' AND ', $this->where);
+        }
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($this->bindings);
+    }
+    public function delete() {
+        $sql = "DELETE FROM $this->table";
+
+        if (!empty($this->where)) {
+            $sql .= ' WHERE ' . implode(' AND ', $this->where);
+        }
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($this->bindings);
+    }
 }
 
 ?>
