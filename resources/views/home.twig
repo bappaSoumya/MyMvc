@@ -1,0 +1,74 @@
+{% extends 'layouts/app.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>MyMVC Framework</h1>
+            <p class="lead mt-3">Build fast, flexible, and modern web applications with a lightweight PHP MVC framework powered by Twig.</p>
+            <a href="#quick-start" class="btn btn-primary btn-lg mt-4">Get Started</a>
+        </div>
+    </section>
+
+    <!-- <form method="POST" action="/submit">
+        {{ call('csrf')|raw }}
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form> -->
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose MyMvc?</h2>
+            <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card feature-card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Powerfull MVC</h5>
+                                <p class="card-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card feature-card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Easy structure</h5>
+                                <p class="card-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card feature-card h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Built in a glance</h5>
+                                <p class="card-text"></p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick-Start Section -->
+    <section id="quick-start" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Get Started with MyMvc</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <p>Install MyMvc by downloading and start building in seconds:</p>
+                    <div class="quick-start">
+                        <pre><code>
+cd myapp
+php -S localhost:8000</code></pre>
+                    </div>
+                    <p class="mt-3">Check out our <a href="#docs">documentation</a> for detailed setup instructions and advanced features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

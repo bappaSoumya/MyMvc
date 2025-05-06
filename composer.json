@@ -1,0 +1,17 @@
+{
+    "name": "user/my-mvc",
+    "autoload": {
+        "psr-4": {
+            "User\\MyMvc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SJC"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0",
+        "dompdf/dompdf": "^3.1"
+    }
+}
