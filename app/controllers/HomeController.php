@@ -9,6 +9,7 @@ class HomeController extends Controller {
             'users' => $userModel->getUsers()
         ];
         //print_r($data);
+        //$this->redirect('form');
         $this->view('home', $data);
     }
 

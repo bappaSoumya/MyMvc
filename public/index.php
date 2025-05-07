@@ -11,10 +11,20 @@ if (!file_exists($autoloader)) {
 }
 require_once $autoloader;
 
+// Verify .env file exists
+use Dotenv\Dotenv;
+
+// Load environment variables from .env file
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+require_once '../app/core/Core.php';
 require_once '../config/database.php';
 require_once '../config/constants.php';
 require_once '../app/core/Router.php';
 require_once '../app/core/Registration.php';
+require_once '../app/core/Request.php';
+require_once '../app/core/fileUpload.php';
 
 $registration = new Registration();
 

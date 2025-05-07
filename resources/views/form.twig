@@ -1,0 +1,36 @@
+{% extends 'layouts/app.twig' %}
+
+{% block title %}Form Example{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>MyMVC Framework</h1>
+            <p class="lead mt-3">Build fast, flexible, and modern web applications with a lightweight PHP MVC framework powered by Twig.</p>
+            <a href="#quick-start" class="btn btn-primary btn-lg mt-4">Get Started</a>
+        </div>
+    </section>
+    {# {{ PHP('__ENV', 'APP_NAME')}} #}
+    <form method="POST" action="/form/submit">
+        {{ PHP('csrf')|raw }}
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ PHP('old' , 'name') }}">
+            {% if errors.name %}
+                <div class="text-danger">{{ errors.name[0] }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ PHP('old' , 'email') }}">
+            {% if errors.email %}
+                <div class="text-danger">{{ errors.email[0] }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+{% endblock %}

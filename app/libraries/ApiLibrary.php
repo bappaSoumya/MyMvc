@@ -1,6 +1,6 @@
 <?php
 
-class Api {
+class ApiLibrary {
     /**
      * Send a JSON response
      *

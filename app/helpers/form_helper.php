@@ -141,4 +141,17 @@
         }
         return '<input type="hidden" name="' . htmlspecialchars($name) . '" value="' . htmlspecialchars($value) . '"' . $attr_string . '>';
     }
+
+    /**
+     * Retrieve an old input value.
+     *
+     * @param string $field Field name
+     * @return string|null Old input value
+     */
+    function old($field) {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        echo $_SESSION['old'][$field] ?? '';
+    }
 ?>

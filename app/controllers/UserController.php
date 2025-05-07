@@ -1,5 +1,8 @@
 <?php
 class UserController extends Controller {
+    public function __construct() { // Example model loading
+        $this->library('ApiLibrary');
+    }
     public function getUsers() {
         // Example data (replace with database query)
         $users = [
@@ -8,16 +11,16 @@ class UserController extends Controller {
         ];
 
         // Send JSON response
-        Api::sendResponse($users);
+        ApiLibrary::sendResponse($users);
     }
 
     public function createUser() {
         // Get JSON input
-        $data = Api::getRequestData();
+        $data = ApiLibrary::getRequestData();
 
         // Validate input
         if (empty($data['name']) || empty($data['email'])) {
-            Api::sendError('Name and email are required.', 422);
+            ApiLibrary::sendError('Name and email are required.', 422);
         }
 
         // Example response (replace with database insertion logic)
@@ -28,6 +31,6 @@ class UserController extends Controller {
         ];
 
         // Send JSON response
-        Api::sendResponse($newUser, 201);
+        ApiLibrary::sendResponse($newUser, 201);
     }
 }

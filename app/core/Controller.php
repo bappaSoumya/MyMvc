@@ -16,7 +16,7 @@ class Controller {
         ]);
 
         // Add a dynamic function handler for PHP and custom functions
-        $this->twig->addFunction(new TwigFunction('call', function ($functionName, ...$args) {
+        $this->twig->addFunction(new TwigFunction('PHP', function ($functionName, ...$args) {
             if (function_exists($functionName)) {
                 return call_user_func_array($functionName, $args);
             }
@@ -87,6 +87,45 @@ class Controller {
         } catch (\Twig\Error\LoaderError $e) {
             die('Error: View file "' . $viewPath . '.twig" not found.');
         }
+    }
+
+    public function library($library) {
+        // Load the specified library
+        $libraryFile = '../app/libraries/' . $library . '.php';
+        if (!file_exists($libraryFile)) {
+            die('Error: Library file "' . $libraryFile . '" not found.');
+        }
+        require_once $libraryFile;
+        
+        // Verify the library class exists
+        if (!class_exists($library)) {
+            die('Error: Library class "' . $library . '" not found in ' . $library . '.php');
+        }
+        
+        return new $library();
+    }
+    public function helper($helper) {
+        // Load the specified helper
+        $helperFile = '../app/helpers/' . $helper . '.php';
+        if (!file_exists($helperFile)) {
+            die('Error: Helper file "' . $helperFile . '" not found.');
+        }
+        require_once $helperFile;
+    }
+
+    public function redirect($url) {
+        // Redirect to the specified URL
+        header('Location: ' . BASE_URL  . $url);
+        exit;
+    }
+    public function back() {
+        // Redirect to the previous page
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            header('Location: ' . BASE_URL);
+        }
+        exit;
     }
 
     public function page_404() {
